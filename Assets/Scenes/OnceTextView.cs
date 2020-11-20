@@ -11,8 +11,13 @@ public class OnceTextView : MonoBehaviour
     private float FadeOutTimer = 0.3f;
     [SerializeField]
     private CanvasGroup onceCanvasGroup = null;
+    //コールバック関数を定義する
+    private System.Action<GameObject> callBack = null;
     // Start is called before the first frame update
-    
+    private void Awake()
+    {
+        onceCanvasGroup = GetComponent<CanvasGroup>();
+    }
     //<summary>
     //</summary>
     public void FadeInOneceText()
@@ -28,7 +33,7 @@ public class OnceTextView : MonoBehaviour
         while (onceCanvasGroup.alpha < 1.0f)
         {
             //　所定時間をかけて透明度を加算する
-            onceCanvasGroup.alpha += (1.0f / FadeInTimer)*Time.deltaTime;
+            onceCanvasGroup.alpha += (1.0f / FadeInTimer) * Time.deltaTime;
             //透明度のMAXが1なのでそれを超えたら1になるように修正する
 
             if (onceCanvasGroup.alpha >= 1.0f)
@@ -52,7 +57,7 @@ public class OnceTextView : MonoBehaviour
         while (onceCanvasGroup.alpha < 0.0f)
         {
             //　所定時間をかけて透明度を加算する
-            onceCanvasGroup.alpha -=( 1.0f / FadeOutTimer)*Time.deltaTime;
+            onceCanvasGroup.alpha -= (1.0f / FadeOutTimer) * Time.deltaTime;
             //透明度のMAXが1なのでそれを超えたら1になるように修正する
 
             if (onceCanvasGroup.alpha <= 0.0f)
@@ -60,11 +65,26 @@ public class OnceTextView : MonoBehaviour
             //１フレーム待機する
             yield return null;
         }
+        if(null !=callBack)
+        {
+            callBack(gameObject);
+        }
     }
 
+
+    /// <summary>
+
+    /// </summary>
     // Update is called once per frame
-    void Update()
+    public void FadeOutText(float dalayTime = 0.0f, System.Action<GameObject> cb = null)
     {
-        
+        //コールバック関数を登録
+        callBack = cb;
+        //不透明に設定する
+        onceCanvasGroup.alpha = 1.0f;
+        // フェードアウト開始
+        StartCoroutine(FadeOut(dalayTime));
     }
+    //コールバック関数が登録されていたら呼び出す
+
 }

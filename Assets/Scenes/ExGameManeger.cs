@@ -63,8 +63,10 @@ public class ExGameManeger : MonoBehaviour
             // すべての文字オブジェクトの重力を有効にする
             messageFonts.ForEach(msg => msg.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic);
             // 一定時間後にフェードアウトするように設定する
-            messageFonts.ForEach(msg => msg.GetComponent<OnceTextView>().FadeOutOneceText());
+            messageFonts.ForEach(msg => msg.GetComponent<OnceTextView>().FadeOutText(GetRandomTime(5, 10),DestroyOneText));
 
+            messageFonts.ForEach(msg => msg.GetComponent<Rigidbody2D>()
+            .AddForce(new Vector2(Random.Range(-1000.0f,10.0f), Random.Range(-1000.0f, 10.0f)),ForceMode2D.Impulse));
         }
     }
     IEnumerator FontDisp()
@@ -102,5 +104,23 @@ public class ExGameManeger : MonoBehaviour
     {
         return new Vector2(startPosition.x + (currentPosition % wideStringLengthMax) * widePadding,
             startPosition.y - (currentPosition / wideStringLengthMax) * heightPadding);
+    }
+
+    ///<summary>
+    ///指定されたゲームオブジェクトを削除するコールバック関数
+    ///</summary>
+    ///<param name="gobj"></param>
+    private void DestroyOneText(GameObject gobj)
+    {
+        Destroy(gobj);
+    }
+    ///<summary>
+    ///ランダムの時間習得
+    ///</summary>
+    ///<param name="min">最小値</param>
+    ///<param name="max">最大値</param>
+    private float GetRandomTime(float min, float max)
+    {
+        return Random.Range(min, max);
     }
 }
