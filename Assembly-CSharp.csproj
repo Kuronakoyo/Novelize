@@ -65,6 +65,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scenes\ExGameManeger.cs" />
     <Compile Include="Assets\Scenes\OnceTextView.cs" />
+    <Compile Include="Assets\Scripts\Controls\ExGameManager.cs" />
+    <Compile Include="Assets\Scripts\Controls\GameMainControl.cs" />
+    <Compile Include="Assets\Scripts\Controls\ScenarioDataControl.cs" />
+    <Compile Include="Assets\Scripts\Models\MessageModel.cs" />
+    <Compile Include="Assets\Scripts\Models\ScenarioModel.cs" />
+    <Compile Include="Assets\Scripts\Views\OneTextView.cs" />
+    <None Include="Assets\Resources\Datas\scenario.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/student/Desktop/Novelize/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

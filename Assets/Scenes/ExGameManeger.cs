@@ -65,8 +65,6 @@ public class ExGameManeger : MonoBehaviour
             // 一定時間後にフェードアウトするように設定する
             messageFonts.ForEach(msg => msg.GetComponent<OnceTextView>().FadeOutText(GetRandomTime(5, 10),DestroyOneText));
 
-            messageFonts.ForEach(msg => msg.GetComponent<Rigidbody2D>()
-            .AddForce(new Vector2(Random.Range(-1000.0f,10.0f), Random.Range(-1000.0f, 10.0f)),ForceMode2D.Impulse));
         }
     }
     IEnumerator FontDisp()
