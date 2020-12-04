@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1755231822}
   dispTimeMax: 0.1
+  scenarioDataControl: {fileID: 0}
 --- !u!4 &175331530
 Transform:
   m_ObjectHideFlags: 0

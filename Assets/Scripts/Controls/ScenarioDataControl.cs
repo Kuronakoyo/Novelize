@@ -10,7 +10,7 @@ public class ScenarioDataControl : MonoBehaviour
     ///　読み込んだシナリオデータを仕分けして保存する
     /// </summary>
     /// <param name="scenarioText">読み込んだシナリオテキスト</param>
-    public void　InitScenarioData(string scenarioText)
+    public void InitScenarioData(string scenarioText)
     {
         // テキストを改行で区切りリスト化する
         scenarioModel.scenario = scenarioText.Split('\n');
@@ -22,14 +22,21 @@ public class ScenarioDataControl : MonoBehaviour
     /// <summary>
     /// メッセージを取得する
     /// </summary>
-    /// <returns></returns>
-    public List<string> LoadMessage()
+    /// <returns>テキストに表示する文字を習得する</returns>
+    public string LoadMessage()
     {
         //一行読み込み
         var msg = scenarioModel.scenario[scenarioModel.nowSelectline++];
         // Json形式を定義したクラスデータに変換する
         var messages = JsonUtility.FromJson<MessageModel>(msg);
         // 取得したメッセージ情報を返す
-        return messages.msg;
+        return messages.GetMessage();
     }
+    ///<summary>
+
+    public bool IsEndOfLine()
+    {
+        return (scenarioModel.MaxLineCount == scenarioModel.nowSelectline);
+    }
+
 }

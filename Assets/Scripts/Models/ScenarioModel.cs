@@ -12,5 +12,6 @@ public class ScenarioModel
     public int nowSelectline = 0;
     // シナリオを配列で保存する
     public string[] scenario; 
-
+    // 最大行数の取得
+    public int MaxLineCount { get { return scenario.Length; } }
 }
